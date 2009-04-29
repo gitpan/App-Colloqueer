@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+  <script type="text/ecmascript" defer="defer" encoding="utf-8" src="roomTopicBanner.js"></script>
+  <style type="text/css">
+  [% INCLUDE default.css %]
+  [% INCLUDE main.css %]
+  html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+  }
+  body {
+    height: 100%;
+    width: 100%;
+    display: block;
+    margin: 0;
+    padding: 0;
+    border: none;
+    border-spacing: 0;
+    overflow: hidden;
+  }
+
+  .banner {
+    display: table-row;
+    background-color: white;
+  }
+
+  .banner > * {
+    display: table-cell;
+    border: none;
+    vertical-align: top;
+  }
+  div#content {
+    width: 100%;
+    height: 100%;
+    overflow-x: none;
+    overflow-y: scroll;
+  }
+  </style>
+  <script type="text/javascript">
+    [% INCLUDE default.js %]
+  </script>
+</head>
+<body>
+  <div id="content"><div style="padding:4px 0 5px 0;overflow:hidden">[% url_base %]</div></div>
+  [% INCLUDE genericTemplate.html %]
+  <script type="text/javascript">
+    document.title = '__empty__';
+    scrollToBottom();
+    monitorTitle = function () {
+      if (document.title != '__empty__') {
+        var html = document.title;
+        var container = document.getElementById('content').childNodes[0];
+        if (html.match(/^<span class="sep"/)) {
+          var msg = container.getElementsByClassName('message');
+          if (msg[msg.length - 1]) {
+            msg[msg.length - 1].parentNode.innerHTML += html;
+          }
+          msg = undefined;
+        }
+        else {
+          container.innerHTML += html;
+        }
+        html = undefined;
+        container = undefined;
+        scrollToBottom();
+        document.title = '__empty__';
+      }
+      setTimeout(monitorTitle, 100);
+    }
+    monitorTitle();
+  </script>
+</body>
+</html>
+

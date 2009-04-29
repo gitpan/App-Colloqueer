@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf8"?>
+<envelope>
+  <sender hostmask="[% from %]"[% IF self %] self="yes"[% END %]>[% from %]</sender>
+  [% FOR msg IN msgs %]
+  <message id="[% msg.id %]" received="[% msg.date.ymd %] [% msg.date.hms %]">[% msg.html %]</message>
+  [% END %]
+</envelope>

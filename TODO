@@ -1,0 +1,9 @@
+Small:
+- Try other themes, add a theme selector
+- topic
+- /names command
+- tab completion (started)
+
+Large:
+- Remove use of Template, should be able to do it all with libxml2
+- Multiple servers
